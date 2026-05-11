@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIFA PALMERO | OFFICIAL SITE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --neon: #00d2ff; --glow: 0 0 15px #00d2ff; --bg: #020202; }
+        body { background: var(--bg); color: #eee; font-family: 'Orbitron', sans-serif; margin: 0; display: flex; justify-content: center; padding: 20px 0; }
+        .container { max-width: 850px; width: 95%; background: #080808; border: 1px solid #1a1a1a; box-shadow: 0 0 30px rgba(0, 210, 255, 0.1); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; min-height: 90vh; }
+        .nav-tabs { display: flex; justify-content: center; background: #000; border-bottom: 1px solid #222; flex-wrap: wrap; }
+        .tab-btn { background: transparent; border: none; color: #555; padding: 15px 25px; font-family: 'Orbitron'; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.75rem; }
+        .tab-btn.active { color: var(--neon); border-bottom: 2px solid var(--neon); text-shadow: 0 0 10px var(--neon); }
+        .content-section { display: none; padding: 40px; animation: fadeIn 0.4s ease-in-out; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        
+        /* Logo Styling */
+        .logo-container { position: relative; width: 100%; max-width: 600px; margin: 0 auto 30px; padding: 5px; border-radius: 10px; overflow: hidden; background: rgba(0, 210, 255, 0.03); }
+        .logo-container::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, var(--neon), transparent 30%); animation: rotate 4s linear infinite; z-index: 1; }
+        .logo-container::after { content: ''; position: absolute; inset: 3px; background: #080808; border-radius: 8px; z-index: 2; }
+        .main-logo { position: relative; width: 100%; border-radius: 8px; z-index: 3; display: block; }
+        @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* UI Elements */
+        .history-box { text-align: left; border-left: 3px solid var(--neon); padding-left: 20px; margin-top: 30px; line-height: 1.8; }
+        .history-title { color: var(--neon); font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .audio-interface { background: rgba(0, 210, 255, 0.05); border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 10px; padding: 15px; margin-bottom: 30px; text-align: center; }
+        .play-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 8px 20px; border-radius: 4px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.7rem; transition: 0.3s; }
+        .play-btn:hover { background: var(--neon); color: #000; box-shadow: var(--glow); }
+
+        .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { background: transparent; color: var(--neon); text-decoration: none; padding: 12px 30px; border: 2px solid var(--neon); border-radius: 50px; font-weight: bold; transition: 0.4s; font-size: 0.8rem; letter-spacing: 1px; }
+        .social-btn:hover { background: var(--neon); color: #000; box-shadow: var(--glow); }
+        .tiktok-btn { border-color: #ff0050; color: #ff0050; }
+        .tiktok-btn:hover { background: #ff0050; color: #fff; box-shadow: 0 0 15px #ff0050; }
+
+        .leader-card { background: #050505; border: 1px solid #111; padding: 25px; border-radius: 15px; margin-bottom: 20px; border-left: 4px solid var(--neon); text-align: left; }
+        .rank-tag { color: var(--neon); font-size: 0.65rem; font-weight: bold; letter-spacing: 2px; display: block; margin-bottom: 5px; }
+        .leader-name { color: #fff; font-size: 1.3rem; margin-bottom: 10px; display: block; }
+        .leader-desc { color: #aaa; font-size: 0.85rem; line-height: 1.6; font-family: sans-serif; }
+
+        .track-card { background: #050505; border: 1px solid #111; padding: 15px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+        .track-card audio { height: 35px; filter: invert(1) hue-rotate(180deg); width: 220px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .gallery-item { width: 100%; height: 150px; border: 1px solid #222; border-radius: 8px; object-fit: cover; transition: 0.3s; }
+        .gallery-item:hover { border-color: var(--neon); transform: scale(1.05); }
+
+        .footer { padding: 25px; color: #333; font-size: 0.65rem; border-top: 1px solid #111; text-align: center; margin-top: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab('home')">Home</button>
+            <button class="tab-btn" onclick="openTab('tracks')">Track Palmero</button>
+            <button class="tab-btn" onclick="openTab('leadership')">Leadership</button>
+            <button class="tab-btn" onclick="openTab('gallery')">Gallery</button>
+        </nav>
+
+        <!-- SECTION: HOME -->
+        <div id="home" class="content-section active">
+            <div class="audio-interface">
+                <audio id="bgMusic" loop><source src="https://b.top4top.io/m_378385i6y0.mp3"></audio>
+                <button class="play-btn" onclick="toggleMusic()" id="musicBtn">PLAY ANTHEM</button>
+            </div>
+            
+            <div class="logo-container">
+                <!-- الرابط الجديد للصورة -->
+                <img src="https://i.postimg.cc/CxL06BRw/file-00000000e74c720aa4f9c129a2a06eb5.png" class="main-logo">
+            </div>
+
+            <div class="history-box">
+                <span class="history-title">Organization History</span>
+                <p>Rifa Gang is a highly organized street organization, founded in high-risk urban neighborhoods. It began as a small group protecting its territory before evolving into one of the most dominant forces on the streets. Loyalty is our core strength, and our legacy is written in the blood and sweat of those who dared to challenge the Palmero authority.</p>
+                <p>Since 2026, we have established a new order, where respect is earned and betrayal is never forgotten.</p>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://discord.gg/3phaz4mt6" target="_blank" class="social-btn">DISCORD</a>
+                <a href="https://www.tiktok.com/@jvanx78?_r=1&_t=ZS-96GsXRxlpsP" target="_blank" class="social-btn tiktok-btn">TIKTOK</a>
+            </div>
+        </div>
+
+        <!-- SECTION: TRACKS -->
+        <div id="tracks" class="content-section">
+            <div class="track-card"><div>01 PalmeroV1 & Boutista</div><audio controls><source src="https://h.top4top.io/m_3697mhxcp1.mp3"></audio></div>
+            <div class="track-card"><div>02 PalmeroV2 & Boutista</div><audio controls><source src="https://l.top4top.io/m_3783pbzeb0.mp3"></audio></div>
+        </div>
+
+        <!-- SECTION: LEADERSHIP -->
+        <div id="leadership" class="content-section">
+            <div class="leader-card">
+                <span class="rank-tag">OG - ORIGINAL GANGSTER</span>
+                <span class="leader-name">Juan_Adam</span>
+                <p class="leader-desc">A fierce defender of Rifa Palmero. Known for his unwavering loyalty, he stands by every member of the gang and has led countless street wars and legendary battles to victory.</p>
+            </div>
+
+            <div class="leader-card">
+                <span class="rank-tag">CO-OG - SECOND IN COMMAND</span>
+                <span class="leader-name">Alba_Martinez</span>
+                <p class="leader-desc">The calm mind of the organization. Renowned for his immense composure and strategic thinking, every decision he makes is precise and leads the gang toward success.</p>
+            </div>
+
+            <div class="leader-card">
+                <span class="rank-tag">CO-OG - SECOND IN COMMAND</span>
+                <span class="leader-name">Stifano_Smoker</span>
+                <p class="leader-desc">The right hand of the leader. A highly intelligent operative who serves as the backbone of the organization's intelligence and tactical planning.</p>
+            </div>
+        </div>
+
+        <!-- SECTION: GALLERY -->
+        <div id="gallery" class="content-section">
+            <div class="gallery-grid">
+                <img src="https://i.postimg.cc/7G4hcWDR/3fb2da9c-b4d6-4178-8756-f770b3f273a0.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/vgvTdtHK/9c497716-cbf6-494e-9b59-2bd464243293.png" class="gallery-item">
+                <img src="https://i.postimg.cc/sQJxR4D4/bandicam-2026-05-05-02-27-57-503.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/PvrxfvCk/Capture-decran-2026-05-09-164947.png" class="gallery-item">
+                <img src="https://i.postimg.cc/yWVWytvp/gta-sa-2026-04-25-14-31-37-469.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/JH4n7Hs3/gta-sa-2026-04-26-05-35-25-378.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/hQPj4QXm/gta-sa-2026-04-26-05-35-56-869.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/YLq92Lv1/gta-sa-2026-04-26-05-37-31-239.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/JH4n7Hsy/gta-sa-2026-04-26-05-38-24-413.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/PvrxfvC5/gta-sa-2026-04-26-05-40-06-386.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/rRFmyRDD/gta-sa-2026-04-26-05-42-31-122.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/S2GRpfN7/gta-sa-2026-04-29-00-00-17-777.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/Kk5jyDv9/gta-sa-2026-05-05-13-15-53-946.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/TLc1XJYH/gta-sa-2026-05-06-16-37-06-390.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/8fP5kf7D/gta-sa-2026-05-07-00-33-51-538.jpg" class="gallery-item">
+                <img src="https://i.postimg.cc/TLc1XJYN/GTA-San-Andreas-05-05-2026-00-48-39.png" class="gallery-item">
+                <img src="https://i.postimg.cc/VrFvcWks/sa-mp-016.png" class="gallery-item">
+                <img src="https://i.postimg.cc/WF7zPw12/sa-mp-017.png" class="gallery-item">
+                <img src="https://i.postimg.cc/S2GRpfxb/sa-mp-021.png" class="gallery-item">
+                <img src="https://i.postimg.cc/jnd5qnDt/sa-mp-024.png" class="gallery-item">
+                <img src="https://i.postimg.cc/5QN09QXx/sa-mp-177-1.png" class="gallery-item">
+            </div>
+        </div>
+
+        <div class="footer">RIFA PALMERO - OFFICIAL 2026</div>
+    </div>
+
+    <script>
+        function openTab(t){
+            document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+            document.getElementById(t).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        const m = document.getElementById('bgMusic');
+        const b = document.getElementById('musicBtn');
+        function toggleMusic(){
+            if(m.paused){m.play();b.innerText="PAUSE ANTHEM";}
+            else{m.pause();b.innerText="PLAY ANTHEM";}
+        }
+    </script>
+</body>
+</html>
